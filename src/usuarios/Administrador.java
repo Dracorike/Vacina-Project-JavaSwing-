@@ -41,4 +41,9 @@ public class Administrador {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    @Override
+    public String toString(){
+        return getNome();
+    }
 }

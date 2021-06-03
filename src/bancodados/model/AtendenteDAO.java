@@ -17,7 +17,7 @@ public class AtendenteDAO {
 
         try{
             stmt = con.prepareStatement("INSERT INTO atendentes (nome, cpf, usuario, senha) " +
-                    "VALUES (?, ?, ?, ?, ?)");
+                    "VALUES (?, ?, ?, ?)");
 
             stmt.setString(1, atendente.getNome());
             stmt.setString(2, atendente.getCpf());
@@ -27,7 +27,7 @@ public class AtendenteDAO {
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
         }catch (SQLException ex){
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar: " + ex);
         }finally {
             ConectionFactory.closeConnection(con, stmt);
         }

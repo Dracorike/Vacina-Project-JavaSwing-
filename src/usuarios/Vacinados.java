@@ -10,6 +10,8 @@ public class Vacinados {
     private boolean trabalho_saude;
     private String endereco;
     private LocalDate data_vacinacao;
+    private int prioridade;
+    private boolean vacinado;
 
     public int getId() {
         return _id;
@@ -59,7 +61,20 @@ public class Vacinados {
         this.data_vacinacao = data_vacinacao;
     }
 
-    
-    
+    public int getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public boolean isVacinado() {
+        return vacinado;
+    }
+
+    public void setVacinado(boolean vacinado) {
+        this.vacinado = vacinado;
+    }
     
 }

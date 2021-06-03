@@ -28,18 +28,20 @@ public class VacinadosDAO {
         
         try{
             stmt = con.prepareStatement("INSERT INTO vacinados"
-                    + " (nome, idade, trabalho_saude, endereco, data_vacinacao)"
+                    + " (nome, idade, trabalho_saude, endereco, prioridade)"
                     + "VALUES (?, ?, ?, ?, ?)");
             
             stmt.setString(1, vacinado.getNome());
             stmt.setInt(2, vacinado.getIdade());
             stmt.setBoolean(3, vacinado.isTrabalho_saude());
             stmt.setString(4, vacinado.getEndereco());
-            stmt.setDate(5, new Date(vacinado.getData_vacinacao().getYear(),
-            vacinado.getData_vacinacao().getMonth().getValue(),
-                    vacinado.getData_vacinacao().getDayOfMonth()));
-            stmt.executeUpdate();
+//            stmt.setDate(5, new Date(vacinado.getData_vacinacao().getYear(),
+//            vacinado.getData_vacinacao().getMonth().getValue(),
+//                    vacinado.getData_vacinacao().getDayOfMonth()));
+//            stmt.executeUpdate();
+            stmt.setInt(5, vacinado.getPrioridade());
             
+            stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Vacinação cadastrada com sucesso!");
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Houve o seguinte erro: " + ex);
