@@ -9,9 +9,9 @@ import javax.swing.DefaultListModel;
 import usuarios.Vacinados;
 
 public class MainAtendente extends javax.swing.JFrame {
-    VacinadosDAO vacinadosDAO = new VacinadosDAO();
-    List<Vacinados> listaFilaVacinar = new ArrayList();
-    
+    private VacinadosDAO vacinadosDAO = new VacinadosDAO();
+    private List<Vacinados> listaFilaVacinar = new ArrayList();
+    private Vacinados proximo = new Vacinados(); 
     
     public MainAtendente() {
         initComponents();
@@ -25,10 +25,13 @@ public class MainAtendente extends javax.swing.JFrame {
         dialogFilaVacinacao = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jlistFilaToVacinar = new javax.swing.JList<>();
-        btnRegistrarVacina = new javax.swing.JButton();
         dialogVacinados = new javax.swing.JDialog();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        lblNomeRegistra = new javax.swing.JLabel();
+        lblIdadeRegistra = new javax.swing.JLabel();
+        lblPrioridadeRegistra = new javax.swing.JLabel();
+        lblEnderecoRegistra = new javax.swing.JLabel();
+        btnRegistrarVacina = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnFilaVacinacao = new javax.swing.JButton();
 
@@ -41,66 +44,89 @@ public class MainAtendente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jlistFilaToVacinar);
 
-        btnRegistrarVacina.setText("Registrar Vacina");
-        btnRegistrarVacina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarVacinaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout dialogFilaVacinacaoLayout = new javax.swing.GroupLayout(dialogFilaVacinacao.getContentPane());
         dialogFilaVacinacao.getContentPane().setLayout(dialogFilaVacinacaoLayout);
         dialogFilaVacinacaoLayout.setHorizontalGroup(
             dialogFilaVacinacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogFilaVacinacaoLayout.createSequentialGroup()
                 .addContainerGap(59, Short.MAX_VALUE)
-                .addGroup(dialogFilaVacinacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogFilaVacinacaoLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarVacina)
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogFilaVacinacaoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         dialogFilaVacinacaoLayout.setVerticalGroup(
             dialogFilaVacinacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogFilaVacinacaoLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrarVacina)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        dialogVacinados.setMinimumSize(new java.awt.Dimension(450, 300));
+        dialogVacinados.setMinimumSize(new java.awt.Dimension(400, 300));
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        lblNomeRegistra.setText("Nome:");
+
+        lblIdadeRegistra.setText("Idade:");
+
+        lblPrioridadeRegistra.setText("prioridade:");
+
+        lblEnderecoRegistra.setText("Endereço:");
+
+        btnRegistrarVacina.setText("Registrar vacina");
+        btnRegistrarVacina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarVacinaActionPerformed(evt);
+            }
         });
-        jScrollPane2.setViewportView(jList2);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Proxima Vacina");
 
         javax.swing.GroupLayout dialogVacinadosLayout = new javax.swing.GroupLayout(dialogVacinados.getContentPane());
         dialogVacinados.getContentPane().setLayout(dialogVacinadosLayout);
         dialogVacinadosLayout.setHorizontalGroup(
             dialogVacinadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogVacinadosLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(dialogVacinadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEnderecoRegistra)
+                    .addComponent(lblPrioridadeRegistra)
+                    .addGroup(dialogVacinadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblNomeRegistra)
+                        .addComponent(lblIdadeRegistra)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogVacinadosLayout.createSequentialGroup()
+                .addGap(0, 136, Short.MAX_VALUE)
+                .addGroup(dialogVacinadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegistrarVacina)
+                    .addComponent(jLabel5))
+                .addGap(123, 123, 123))
         );
         dialogVacinadosLayout.setVerticalGroup(
             dialogVacinadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dialogVacinadosLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(lblNomeRegistra)
+                .addGap(18, 18, 18)
+                .addComponent(lblIdadeRegistra)
+                .addGap(18, 18, 18)
+                .addComponent(lblPrioridadeRegistra)
+                .addGap(18, 18, 18)
+                .addComponent(lblEnderecoRegistra)
+                .addGap(41, 41, 41)
+                .addComponent(btnRegistrarVacina)
+                .addGap(50, 50, 50))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Registros de vacinação");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnFilaVacinacao.setText("Fila de vacinação");
         btnFilaVacinacao.addActionListener(new java.awt.event.ActionListener() {
@@ -155,13 +181,29 @@ public class MainAtendente extends javax.swing.JFrame {
         jlistFilaToVacinar.setModel(listModel);
     }//GEN-LAST:event_btnFilaVacinacaoActionPerformed
 
-    private void btnRegistrarVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVacinaActionPerformed
-        Vacinados vac = listaFilaVacinar.get(jlistFilaToVacinar.getSelectedIndex());
-        vac.setData_vacinacao(LocalDate.now());
-        vac.setVacinado(true);
-        vacinadosDAO.update(vac);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dialogVacinados.setVisible(true);
+        List<Vacinados> lista = vacinadosDAO.getVacinadosGroupPrioridade();
+        Vacinados vac = null;
+        for(Vacinados pecorre: lista){
+            if(!pecorre.isVacinado()){
+                vac = pecorre;
+                break;
+            }
+        }
         
-        dialogFilaVacinacao.setVisible(false);
+        lblNomeRegistra.setText("Nome: " + vac.getNome());
+        lblIdadeRegistra.setText("Idade: " + Integer.toString(vac.getIdade()));
+        lblEnderecoRegistra.setText("Endereço: " + vac.getEndereco());
+        lblPrioridadeRegistra.setText("Prioridade: " + Integer.toString(vac.getPrioridade()));
+        proximo = vac;
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnRegistrarVacinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVacinaActionPerformed
+        proximo.setData_vacinacao(LocalDate.now());
+        vacinadosDAO.update(proximo);
+        
+        dialogVacinados.setVisible(false);
     }//GEN-LAST:event_btnRegistrarVacinaActionPerformed
 
     public static void main(String args[]) {
@@ -202,9 +244,12 @@ public class MainAtendente extends javax.swing.JFrame {
     private javax.swing.JDialog dialogFilaVacinacao;
     private javax.swing.JDialog dialogVacinados;
     private javax.swing.JButton jButton1;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> jlistFilaToVacinar;
+    private javax.swing.JLabel lblEnderecoRegistra;
+    private javax.swing.JLabel lblIdadeRegistra;
+    private javax.swing.JLabel lblNomeRegistra;
+    private javax.swing.JLabel lblPrioridadeRegistra;
     // End of variables declaration//GEN-END:variables
 }

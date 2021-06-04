@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -111,7 +112,6 @@ public class VacinadosDAO {
         }
     }
     
-     
     
     public List<Vacinados> getVacinadosByPrioridade(int prioridade){
         List<Vacinados> listaVacinados = new ArrayList();
@@ -179,5 +179,40 @@ public class VacinadosDAO {
         }
         
         return listaVacinados;
+    }
+
+    public List<Vacinados> getVacinadosToDate(LocalDate inicio, LocalDate ate){
+        List<Vacinados> vacinados = new ArrayList();
+        Connection con = ConectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try{
+            stmt = con.prepareStatement("SELECT * FROM vacinados WHERE vacinado = ? and data_vacinacao between ? and ?");
+            stmt.setBoolean(1, true);
+            stmt.setDate(2, new Date(inicio.getYear()-1900, inicio.getMonthValue()-1, inicio.getDayOfMonth()));
+            stmt.setDate(3, new Date(ate.getYear()-1900, ate.getMonthValue()-1, ate.getDayOfMonth()));
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Vacinados vac = new Vacinados();
+                
+                vac.setId(rs.getInt("_id"));
+                vac.setNome(rs.getString("nome"));
+                vac.setIdade(rs.getInt("idade"));
+                vac.setEndereco(rs.getString("endereco"));
+                vac.setPrioridade(rs.getInt("prioridade"));
+                vac.setTrabalho_saude(rs.getBoolean("trabalho_saude"));
+                vac.setVacinado(rs.getBoolean("vacinado"));
+                
+                vacinados.add(vac);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Algo deu errado: " + ex);
+        }finally{
+            ConectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return vacinados;
     }
 }

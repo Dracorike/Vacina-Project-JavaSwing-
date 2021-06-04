@@ -3,6 +3,9 @@ package vacina.project.Janelas;
 import bancodados.model.AdministradorDAO;
 import bancodados.model.AtendenteDAO;
 import bancodados.model.VacinadosDAO;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -61,12 +64,35 @@ public class MainAdministrador extends javax.swing.JFrame {
         listaRemoverAtendente = new javax.swing.JList<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        dialogRelatorio = new javax.swing.JDialog();
+        jLabel10 = new javax.swing.JLabel();
+        txtDiaInicio = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtMesInicio = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtAnoInicio = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtDiaAte = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtMesAte = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtAnoAte = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lblNoventaMais = new javax.swing.JLabel();
+        lblSetentaNoventa = new javax.swing.JLabel();
+        lblCinquentaSetenta = new javax.swing.JLabel();
+        lblCinquentaMenos = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        dialogAgendar.setMinimumSize(new java.awt.Dimension(400, 300));
+        dialogAgendar.setMinimumSize(new java.awt.Dimension(400, 400));
 
         txtNome.setName(""); // NOI18N
 
@@ -138,7 +164,7 @@ public class MainAdministrador extends javax.swing.JFrame {
                 .addGap(36, 36, 36))
         );
 
-        dialogCadastrar.setMinimumSize(new java.awt.Dimension(400, 300));
+        dialogCadastrar.setMinimumSize(new java.awt.Dimension(400, 400));
 
         jLabel4.setText("Nome Completo");
 
@@ -217,7 +243,7 @@ public class MainAdministrador extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        dialogRemover.setMinimumSize(new java.awt.Dimension(400, 300));
+        dialogRemover.setMinimumSize(new java.awt.Dimension(400, 400));
 
         listRemoverAdm.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -282,6 +308,168 @@ public class MainAdministrador extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        dialogRelatorio.setMinimumSize(new java.awt.Dimension(400, 400));
+
+        jLabel10.setText("Inicio");
+
+        jLabel11.setText("/");
+
+        txtMesInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesInicioActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("/");
+
+        jLabel13.setText("Até");
+
+        jLabel14.setText("/");
+
+        txtMesAte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesAteActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("/");
+
+        jLabel16.setText("Mais de 90 anos");
+
+        jLabel17.setText("70 anos - 90 anos");
+
+        jLabel18.setText("50 anos - 70 anos");
+
+        jLabel19.setText("Menos de 50 anos");
+
+        lblNoventaMais.setText("0");
+
+        lblSetentaNoventa.setText("0");
+
+        lblCinquentaSetenta.setText("0");
+
+        lblCinquentaMenos.setText("0");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(67, 67, 67)
+                        .addComponent(lblCinquentaMenos))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCinquentaSetenta))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel17)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSetentaNoventa))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel16)
+                            .addGap(77, 77, 77)
+                            .addComponent(lblNoventaMais))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(lblNoventaMais))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(lblSetentaNoventa))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(lblCinquentaSetenta))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(lblCinquentaMenos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dialogRelatorioLayout = new javax.swing.GroupLayout(dialogRelatorio.getContentPane());
+        dialogRelatorio.getContentPane().setLayout(dialogRelatorioLayout);
+        dialogRelatorioLayout.setHorizontalGroup(
+            dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(dialogRelatorioLayout.createSequentialGroup()
+                .addGroup(dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogRelatorioLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDiaAte, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(txtDiaInicio))
+                        .addGap(18, 18, 18)
+                        .addGroup(dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dialogRelatorioLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtMesInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtAnoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(dialogRelatorioLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtMesAte, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtAnoAte, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(dialogRelatorioLayout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(btnBuscar)))
+                .addContainerGap(138, Short.MAX_VALUE))
+        );
+        dialogRelatorioLayout.setVerticalGroup(
+            dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogRelatorioLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtDiaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtMesInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtAnoInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(dialogRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtDiaAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtMesAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtAnoAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(btnBuscar)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Cadastrar usuário");
@@ -306,6 +494,11 @@ public class MainAdministrador extends javax.swing.JFrame {
         });
 
         jButton4.setText("Relatório de vacinas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -429,6 +622,47 @@ public class MainAdministrador extends javax.swing.JFrame {
         dialogRemover.setVisible(false);
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    private void txtMesInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMesInicioActionPerformed
+
+    private void txtMesAteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesAteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMesAteActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        int cincMen = 0,cincSet = 0, setNov = 0, novMai = 0;
+        LocalDate inicio = LocalDate.of(Integer.parseInt(txtAnoInicio.getText()),
+                Integer.parseInt(txtMesInicio.getText()), 
+                Integer.parseInt(txtDiaInicio.getText()));
+        LocalDate ate = LocalDate.of(Integer.parseInt(txtAnoAte.getText()),
+                Integer.parseInt(txtMesAte.getText()), 
+                Integer.parseInt(txtDiaAte.getText()));
+        
+       List<Vacinados> vacinados = vacinadosDAO.getVacinadosToDate(inicio, ate);
+       
+       for(Vacinados pecorrer: vacinados){
+           if(pecorrer.getIdade() < 50){
+               cincMen++;
+           }else if(pecorrer.getIdade() >= 50 && pecorrer.getIdade() < 70){
+               cincSet++;
+           }else if(pecorrer.getIdade() >= 70 && pecorrer.getIdade() < 90){
+               setNov++;
+           }else{
+               novMai++;
+           }
+       }
+       
+       lblCinquentaMenos.setText(Integer.toString(cincMen));
+       lblCinquentaSetenta.setText(Integer.toString(cincSet));
+       lblSetentaNoventa.setText(Integer.toString(setNov));
+       lblNoventaMais.setText(Integer.toString(novMai));
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dialogRelatorio.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,16 +700,28 @@ public class MainAdministrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgendar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastrarUsuario;
     private javax.swing.JButton btnRemover;
     private javax.swing.JDialog dialogAgendar;
     private javax.swing.JDialog dialogCadastrar;
+    private javax.swing.JDialog dialogRelatorio;
     private javax.swing.JDialog dialogRemover;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -484,15 +730,26 @@ public class MainAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCinquentaMenos;
+    private javax.swing.JLabel lblCinquentaSetenta;
+    private javax.swing.JLabel lblNoventaMais;
+    private javax.swing.JLabel lblSetentaNoventa;
     private javax.swing.JList<String> listRemoverAdm;
     private javax.swing.JList<String> listaRemoverAtendente;
     private javax.swing.JRadioButton rbAdmOrNot;
     private javax.swing.JRadioButton rbTrabalhaSaude;
     private javax.swing.JSpinner spnIdade;
+    private javax.swing.JTextField txtAnoAte;
+    private javax.swing.JTextField txtAnoInicio;
     private javax.swing.JTextField txtCPFCadastro;
+    private javax.swing.JTextField txtDiaAte;
+    private javax.swing.JTextField txtDiaInicio;
     private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtMesAte;
+    private javax.swing.JTextField txtMesInicio;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeCadastro;
     private javax.swing.JTextField txtSenhaCadastro;
