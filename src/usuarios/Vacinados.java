@@ -77,4 +77,8 @@ public class Vacinados {
         this.vacinado = vacinado;
     }
     
+    @Override
+    public String toString(){
+        return getNome();
+    }
 }

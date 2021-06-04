@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bancodados.model;
 
 import bancodados.connection.ConectionFactory;
@@ -16,10 +11,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import usuarios.Vacinados;
 
-/**
- *
- * @author pedro
- */
 public class VacinadosDAO {
     
     public void create(Vacinados vacinado){
@@ -93,5 +84,100 @@ public class VacinadosDAO {
             JOptionPane.showMessageDialog(null, "Ocorreu o seguinte erro: " + ex);
         }
                 
+    }
+    
+    public void update(Vacinados vacinado){
+        Connection con = ConectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try{
+            stmt = con.prepareStatement("UPDATE vacinados SET "
+                    + "data_vacinacao = ?, vacinado = ?  "
+                    + "WHERE _id = ?");
+            stmt.setDate(1, new Date(vacinado.getData_vacinacao().getYear() - 1900,
+            vacinado.getData_vacinacao().getMonth().getValue() - 1,
+            vacinado.getData_vacinacao().getDayOfMonth()));
+            stmt.setBoolean(2, true);
+            stmt.setInt(3, vacinado.getId());
+
+            stmt.executeUpdate();            
+            
+            JOptionPane.showMessageDialog(null, "Registro feito!");
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Algo deu errado: " + ex);
+
+        }finally{
+            ConectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+     
+    
+    public List<Vacinados> getVacinadosByPrioridade(int prioridade){
+        List<Vacinados> listaVacinados = new ArrayList();
+        
+        Connection con = ConectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try{
+            stmt = con.prepareStatement("SELECT * FROM vacinados WHERE prioridade = ?");
+            stmt.setInt(1, prioridade);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Vacinados vac = new Vacinados();
+                
+                vac.setId(rs.getInt("_id"));
+                vac.setNome(rs.getString("nome"));
+                vac.setIdade(rs.getInt("idade"));
+                vac.setEndereco(rs.getString("endereco"));
+                vac.setPrioridade(rs.getInt("prioridade"));
+                vac.setTrabalho_saude(rs.getBoolean("trabalho_saude"));
+                vac.setData_vacinacao(rs.getDate("data_vacinacao").toLocalDate());
+                vac.setVacinado(rs.getBoolean("vacinado"));
+                
+                listaVacinados.add(vac);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Algo deu errado: " + ex);            
+        }finally{
+            ConectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return listaVacinados;
+    }
+    
+    public List<Vacinados> getVacinadosGroupPrioridade(){
+        List<Vacinados> listaVacinados = new ArrayList();
+        
+        Connection con = ConectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try{
+            stmt = con.prepareStatement("SELECT * FROM vacinados order by prioridade;");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Vacinados vac = new Vacinados();
+                
+                vac.setId(rs.getInt("_id"));
+                vac.setNome(rs.getString("nome"));
+                vac.setIdade(rs.getInt("idade"));
+                vac.setEndereco(rs.getString("endereco"));
+                vac.setPrioridade(rs.getInt("prioridade"));
+                vac.setTrabalho_saude(rs.getBoolean("trabalho_saude"));
+                vac.setVacinado(rs.getBoolean("vacinado"));
+                
+                listaVacinados.add(vac);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Algo deu errado: " + ex);            
+        }finally{
+            ConectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return listaVacinados;
     }
 }

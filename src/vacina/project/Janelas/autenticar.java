@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class autenticar extends javax.swing.JFrame {
     private MainAdministrador frame = new MainAdministrador();
+    private MainAtendente frame2 = new MainAtendente();
     private AdministradorDAO admDAO = new AdministradorDAO();
     private AtendenteDAO atendenteDAO = new AtendenteDAO();
     private boolean isAdm = false;
@@ -150,10 +151,10 @@ public class autenticar extends javax.swing.JFrame {
             //TODO: uma verificação igual a de cima, porém para os atendentes
             if(atendenteDAO.autenticar(txtUsuario.getText().toString(), txtSenha.getText().toString())){
                 if(frame == null){
-                    frame = new MainAdministrador();
-                    frame.setVisible(true);
+                    frame2 = new MainAtendente();
+                    frame2.setVisible(true);
                 }else{
-                    frame.setVisible(true);
+                    frame2.setVisible(true);
                 }
                 this.setVisible(false);
             }else{
